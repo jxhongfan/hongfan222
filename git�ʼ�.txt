@@ -1,0 +1,33 @@
+修改别名：git config --global alias.st status
+
+git status -s得到的第一个M：是版本库和中间状态有差异
+                   第二个M：是工作区和当前文件有差异
+git diff :查看尚未暂存的文件更新了哪些部分，不加参数直接输入
+git diff head :会显示你当前的索引和上次提交间的差异这些内容在不带"-a"参数运行 "git commit"命令时就会被提交。(暂存区和commit最后一次提交的diff)
+head指向commit最后一次提交
+git branch dev :创建一个dev的分支
+{
+git stash   :保存当前工作进度，然后工作区尚未提交的进度全部不见了
+git stash pop:进度解封
+}
+
+红色代表还没有add加入暂存区的修改
+绿色代表已经add但还没commit的修改
+
+当有修改不想要了
+git checkout a.txt   :如果修改一个文件（没有add，而且已经被提交也就是二次修改或者多次修改），想撤销这次修改。如git checkout /path/ 会把所以修改复原并保存，无法找回
+git reset a .txt     :如果修改了一个文件（已经add），（会让文件回到没有add的状态）想撤销这次修改
+git reset --soft Id  :如果已经修改某几个文件，但是想撤销某个版本，但是当前暂存区，工作区不想撤销（不会重置暂存区和工作区的修改）
+git reset --hard Id  :如果余江修改某几个文件也提交暂存区了，想撤销某个commit,其实还可以找回哦，想要恢复也是可以的
+git reflog
+git reflog show master(这两条都是显示版本以便跳转回原来的版本)
+git reset --hard master@{1} （回到版本1） 里面的master@{1}也可以用Id代替
+
+git merge commitID 在游离态使用（合并操作）
+git lg(显示分支图)
+git cat-file -p HEAD（）
+cat .git/HEAD(查看指针指向哪)
+
+git remote rm origin 删除已经保存的远程地址
+git remote add origin git@github.com:djqiang/gitdemo.git 添加远程地址
+git push origin master 推送版本库到github
