@@ -1,0 +1,27 @@
+
+fastboot烧写：
+fastboot.exe flash bootloader u-boot-iTOP-4412.bin
+fastboot.exe flash kernel zImage
+fastboot.exe flash ramdisk ramdisk-uboot.img
+fastboot.exe flash system system.img
+fastboot reboot
+
+make                                                           --制作内核zImage
+make_ext4fs -s -l 314572800 -a root -L linux system.img root   --制作system.img文件
+arm-none-linux-gnueabi-gcc -o helloworld helloworld.c -static  --编译.c文件
+
+mount -t vfat /dev/sda4 /mnt/disk
+
+用fdisk -l 看看U盘的设备
+
+设备注册：在itop4414kernel文件夹下 vim /arch/arm/mach-exynos/mach-itop4412.c（记得下面还有一个要定义的）
+以及/drivers/char/Kconfig
+
+注册设备节点：vim /driver/char/misc.c(miscdevice结构体)以及vim include/linux/miscdevicd.h
+以及vim include/linux/fs.h（file_operations结构体）
+
+– insmod加载模块命令
+– lsmod查看模块命令
+– rmmod卸载模块命令
+
+
